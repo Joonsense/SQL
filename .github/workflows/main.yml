@@ -1,0 +1,14 @@
+
+# 네이버 부스트코스 SQL 교육 
+# 출처 : https://www.boostcourse.org/ds102/lecture/373293?isDesc=false
+
+# TEST = name,variable
+
+#create database
+CREATE DATABASE TEST;
+
+#database use
+USE TEST;
+
+#delete database
+DROP DATABASE TEST;
