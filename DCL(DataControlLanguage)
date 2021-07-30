@@ -1,0 +1,60 @@
+
+# 네이버 부스트코스 - 기초 데이터 분석을 위한 핵심 SQL
+#출처 https://www.boostcourse.org/ds102/lecture/373326?isDesc=false
+
+
+#데이터 제어어 DCL 데이터 컨트롤 랭귀지 Data Control Language
+#데이터베이스 관리자(DBA)가 특정사용자(User)에게 데이터 접근권한을 부여 및 제거 할 때 사용하는 명령어
+##think : 특정자에게 특정 권한을 준다면, 네이버 카페의 등급별 게시글 작성, 보기 권한인가?
+
+#MYSQL 데이터 베이스 사용. 
+USE MYSQL;
+
+#사용자 확인 
+SELECT *
+	FROM USER;
+# 기본적으로 셋팅되어있는 MYSQL 권한자인가? 
+
+##사용자 추가하기
+#사용자 아이디 및 비밀번호 생성
+CREATE USER 'TEST' @LOCALHOST IDENTIFIED BY 'TEST';
+#'': 아이디 , @LOCALHOST : 로컬에서 접속가능 '아이덴티파이 뒤에는 비밀번호'
+
+#사용자 확인
+select *
+	FROM USER; 
+
+
+#사용자 비밀번호 변경
+SET PASSWORD FOR 'TEST' @LOCALHOST = '1234';
+
+##권한부여 및 제거
+#권한 : CREATE, ALTER, DROP, INSERT, DELETE, UPDATE, SELECT 등
+
+#특정권한 부여
+GRANT SELECT, DELETE ON PRACTICE.회원테이블 to 'TEST' @LOCALHOST;
+# 권한을 부여할 명령어 위 부분은 셀렉트, 딜리트를 부여할 것이고, 데이터베이스및 테이블을 작성하고, 투 뒤에는 권한부여 아이디를 작성
+### 편의성을 위해 사용자아이디를 16번 줄참고. 만들어둔것으로 체킹 가능!!
+
+#특정 권한 제거
+REVOKE DELETE ON practice.회원테이블 FROM 'TEST' @LOCALHOST;
+
+#모든 권한 부여
+grant ALL ON practice.회원테이블 TO 'TEST' @LOCALHOST;
+
+#모든 권한 제거
+REVOKE ALL ON practice.회원테이블 FROM 'TEST' @LOCALHOST;
+
+
+#사용자 삭제
+DROP USER 'TEST' @LOCALHOST;
+
+#사용자 확인
+SELECT *
+	FROM USER;
+
+
+#데이터 제어어 즉, DCL은 데이터 접근 권한 부여 및 제거할때 사용하는 명령어 이다. 권한은 DBA 가 USER에게 직접적으로 부여하는 것이다.
+#사용자확인 : USER MYSQL, 사용자 추가 및 삭제 : CREATE, DROP , 권한 부여 및 삭제: GRANT, REVOKE 
+#데이터베이스 사용자의 추가삭제와 권한에 대한 부여 삭제 명령어가 다르니 이 점 유의해야겠다.
+
